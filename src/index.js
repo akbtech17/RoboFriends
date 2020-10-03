@@ -8,14 +8,21 @@ import * as serviceWorker from './serviceWorker';
 //Include Provider and connect api to connect actions reducers
 import { Provider } from 'react-redux';
 //Import createStore method for creating a store
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import { searchRobots } from './reducers';
+
+//Middleware
+import {createLogger} from 'redux-logger';
+
+
+//creating logger
+const logger = createLogger();
 
 
 
 
 //create a store and pass reducers
-const store = createStore(searchRobots);
+const store = createStore(searchRobots, applyMiddleware(logger));
 
 ReactDOM.render(<Provider store={store}>
                     <App />
