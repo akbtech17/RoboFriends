@@ -4,12 +4,21 @@ import './index.css';
 import App from './containers/App';
 import 'tachyons'
 import * as serviceWorker from './serviceWorker';
-// import {robots} from './robots';
-// import Cardlist from './Cardlist';
 
-ReactDOM.render(<App/>,document.getElementById('root'));
+//Include Provider and connect api to connect actions reducers
+import { Provider } from 'react-redux';
+//Import createStore method for creating a store
+import {createStore} from 'redux';
+import { searchRobots } from './reducers';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+
+
+
+//create a store and pass reducers
+const store = createStore(searchRobots);
+
+ReactDOM.render(<Provider store={store}>
+                    <App />
+                </Provider>, document.getElementById('root'));
+
 serviceWorker.unregister();
